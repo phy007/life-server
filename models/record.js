@@ -23,6 +23,10 @@ class Record extends Base {
     return knex(this.table).where('recordId', '=', id)
   }
 
+  getRecordAndLikeByRecordId (id) {
+    return knex(this.table).join('like', 'like.recordId', '=', 'record.recordId').select('likeId', 'favorite', 'collect', 'record.recordId', 'userName', 'recordText', 'recordImage', 'power', 'record.userId', 'time').where('record.recordId', '=', id)
+  }
+
 }
 
 module.exports = new Record()

@@ -46,17 +46,23 @@ const recordController = {
             }
             friRecord.push(obj)
             let comments = await Comment.getCommentByRecordId(e.recordId)
+            /* 主评论为一条，回复多条，根据每一条评论id，查询到回复，按时间降序获取它的所有回复，保存至每条评论的replys属性值 ，查询为空，不添加*/
+            let c = [], comment
             if (comments.length) {
               for (const r of comments) {
-                let reply = await Reply.getReplyById({ 'commentId': r.commentId})
-                replyArr.push(reply)
+                comment = r
+                let reply = await Reply.getReplyById({ 'commentId': r.commentId })
+                if (reply.length) {
+                  comment.replys = reply
+                }
+                c.push(comment)
               }
             }
-            commentArr.push(comments)
+            commentArr.push(c)
           }
         }
       }
-      res.status(200).send({ friRecord, comments: commentArr, replys: replyArr })
+      res.status(200).send({ friRecord, commentsAndReplys: commentArr })
     } catch (error) {
       console.log(error);
     }
@@ -86,6 +92,20 @@ const recordController = {
       commonWays.sendData(result, res)
     } catch (error) {
       // console.log(error);
+    }
+  },
+
+  getRecordByRecordId: async (req, res) => {
+    try {
+      let result
+      if (req.query.type === 'own') {
+        result = await Record.getRecordByRecordId(req.query.recordId)
+      } else {
+        result = await Record.getRecordAndLikeByRecordId(req.query.recordId)
+      }
+      res.status(200).send(result[0])
+    } catch (error) {
+      console.log(error);
     }
   }
 }

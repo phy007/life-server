@@ -65,6 +65,7 @@ router.get('/getFriRecords', auth, recordController.getFriRecords)
 router.get('/delRecord', recordController.delRecordById)
 router.post('/updateRecord', recordController.updateRecordById)
 router.post('/addRecord', recordController.addRecord)
+router.get('/getRecord', recordController.getRecordByRecordId)
 
 // like
 router.post('/updateFaOrCol', likeController.updateFavOrColById)
