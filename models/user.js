@@ -26,12 +26,20 @@ class User extends Base {
     return knex(this.table).where(params).select()
   }
 
-  getUserImgById(id){
-    return knex(this.table).select('image').where('userId','=',id)
+  getUserImgById (id) {
+    return knex(this.table).select('image').where('userId', '=', id)
   }
 
-  getUserImgByUserName(username){
-    return knex(this.table).select('image').where('userName','=',username)
+  getUserImgByUserName (username) {
+    return knex(this.table).select('image').where('userName', '=', username)
+  }
+
+  getFriendsByIds (idArr) {
+    return knex(this.table).select('userId', 'userName', 'image', 'power').whereIn('userId', idArr).orderBy('userName', 'asc')
+  }
+
+  getPower(params){
+    return knex(this.table).select('power').where(params)
   }
 }
 

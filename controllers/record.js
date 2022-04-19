@@ -4,6 +4,7 @@ const Like = require('../models/like')
 const Comment = require('../models/comment')
 const Reply = require('../models/reply')
 const commonWays = require('../middleware/common')
+const User = require('../models/user')
 
 const recordController = {
   getOwnRecords: async (req, res) => {
@@ -20,12 +21,16 @@ const recordController = {
     try {
       const ownId = req.query.userId
       // 根据本人id获取朋友id
-      const friendIdList = await Relation.getFriendId(ownId)
-      let fIdArr = [], friRecord = [], friRecordArr = [], commentArr = [], replyArr = []
+      const friendIdList = await Relation.getFriendId({ ownId })
+      let fIdArr = [], friRecord = [], friRecordArr = [], commentArr = []
       if (friendIdList.length) {
         for (const e of friendIdList) {
-          // 根据朋友id获取记录
-          fIdArr.push(e.friendId)
+          // 查看权限
+          const p = await User.getPower({ userId: e.friendId })
+          if (p[0].power === '1') {
+            // 根据朋友id获取记录
+            fIdArr.push(e.friendId)
+          }
         }
         friRecordArr = await Record.getRecordByFriendId(fIdArr)
         if (friRecordArr.length) {

@@ -10,6 +10,7 @@ const recordController = require('../controllers/record')
 const likeController = require('../controllers/like')
 const commentController = require('../controllers/comment')
 const replyController = require('../controllers/reply')
+const noticeController = require('../controllers/notice')
 
 const auth = require("../middleware/auth");
 const file = require('../middleware/upload')
@@ -26,6 +27,7 @@ router.get('/delImg', file.del)
 // register
 router.post("/register", userController.register);
 router.get('/existUser', userController.existUser)
+router.get('/getFriends',userController.getFriendsById)
 // login
 router.get("/wxlogin", userController.wxlogin);
 router.post("/login", userController.login);
@@ -80,6 +82,10 @@ router.get('/getComAndRep', commentController.getCommentAndReplyByRecordId)
 // reply
 router.post('/addReply', replyController.addReply)
 router.get('/delReply', replyController.delReply)
+// notice
+router.post('/addNotice',noticeController.addNotice)
+router.post('/delNotice',noticeController.delNotice)
+router.get('/getNotice',noticeController.getNotice)
 // welcome
 // router.post("/welcome", auth, (req, res) => {
 //   res.render('pages/welcome');

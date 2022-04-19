@@ -21,8 +21,8 @@ class Base {
   }
 
   // 删除
-  delete (obj) {
-    return knex(this.table).where(Object.keys(obj)[0], '=', Object.values(obj)[0]).del();
+  delete (params) {
+    return knex(this.table).where(params).del();
   }
 
 }

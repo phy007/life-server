@@ -6,8 +6,8 @@ class Relation extends Base {
     super(props);
   }
 
-  getFriendId (id) {
-    return knex(this.table).select('friendId').where('ownId', '=', id)
+  getFriendId (params) {
+    return knex(this.table).select('friendId').where(params)
   }
 }
 module.exports = new Relation()

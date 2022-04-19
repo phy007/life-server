@@ -1,8 +1,9 @@
 // 引用用户模版数据
 const bcrypt = require('bcryptjs/dist/bcrypt');
-const User = require('../models/user.js');
 const jwt = require('jsonwebtoken');
 const axios = require('axios')
+const User = require('../models/user');
+const Relation = require('../models/relation');
 
 const userController = {
   // 注册信息
@@ -61,6 +62,21 @@ const userController = {
       } else {
         res.status(600).send({ message: 'not found' })
       }
+    } catch (error) {
+      console.log(error);
+    }
+  },
+  getFriendsById: async (req, res) => {
+    try {
+      const friendId = await Relation.getFriendId(req.query.userId)
+      let friArr = []
+      if (friendId.length) {
+        for (const f of friendId) {
+          friArr.push(f.friendId)
+        }
+      }
+      const friends = await User.getFriendsByIds(friArr)      
+      res.status(200).send(friends)
     } catch (error) {
       console.log(error);
     }

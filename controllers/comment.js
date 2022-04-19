@@ -20,7 +20,11 @@ const commentController = {
   addComment: async (req, res) => {
     try {
       const result = await Comment.insert(req.body)
-      commonWays.sendData(result, res)
+      if (result.length) {
+        res.status(200).json({ id: result[0] })
+      } else {
+        res.status(204).send('fail')
+      }
     } catch (error) {
       console.log(error);
     }
