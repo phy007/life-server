@@ -20,8 +20,31 @@ const noticeController = {
   },
   getNotice: async (req, res) => {
     try {
-      const result = await Notice.getNotice({ useredId: req.query.useredId, 'handleNotice': '0' })
-      res.status(200).send(result)
+      const result = await Notice.getNotice({ useredId: req.query.useredId })
+      const l = await Notice.getNotHandle({ useredId: req.query.useredId, 'handleNotice': '0' })
+      let arr = [[], [], [], []]
+      if (result.length) {
+        for (const v of result) {
+          arr[v.type - 1].push(v)
+        }
+      }
+      res.status(200).send({ arr, length: l[0].count })
+    } catch (error) {
+      console.log(error);
+    }
+  },
+  updateNotice: async (req, res) => {
+    try {
+      const result = await Notice.updateNoticeById(req.query)
+      commonWays.sendData(result, res)
+    } catch (error) {
+      console.log(error);
+    }
+  },
+  handleNoticeById: async (req, res) => {
+    try {
+      const result = await Notice.updateNoticeById({ useredId: req.query.id, 'handleNotice': '0' })
+      commonWays.sendData(result, res)
     } catch (error) {
       console.log(error);
     }

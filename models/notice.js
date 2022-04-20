@@ -8,9 +8,16 @@ class Notice extends Base {
   }
 
   getNotice (params) {
-    return knex(this.table).select().where(params)
+    return knex(this.table).join('user', 'user.userId', '=', 'notice.userId').select('userName', 'image', 'noticeId', 'type', 'dateTime', 'noticeCotent', 'recordId', 'friendId', 'handleNotice', 'handleApply').where(params).groupBy('type').orderBy('dateTime', 'asc')
   }
 
+  getNotHandle (params) {
+    return knex(this.table).count('noticeId as count').where(params)
+  }
+
+  updateNoticeById (params) {
+    return knex(this.table).update('handleNotice', '1').where(params)
+  }
 }
 
 module.exports = new Notice();

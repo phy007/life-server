@@ -11,6 +11,7 @@ const likeController = require('../controllers/like')
 const commentController = require('../controllers/comment')
 const replyController = require('../controllers/reply')
 const noticeController = require('../controllers/notice')
+const relationController = require('../controllers/relation')
 
 const auth = require("../middleware/auth");
 const file = require('../middleware/upload')
@@ -86,6 +87,11 @@ router.get('/delReply', replyController.delReply)
 router.post('/addNotice',noticeController.addNotice)
 router.post('/delNotice',noticeController.delNotice)
 router.get('/getNotice',noticeController.getNotice)
+router.get('/updateNotice',noticeController.updateNotice)
+router.get('/handleNotice',noticeController.handleNoticeById)
+// relation
+router.get('/addRelation',relationController.addRelation)
+
 // welcome
 // router.post("/welcome", auth, (req, res) => {
 //   res.render('pages/welcome');
