@@ -39,6 +39,7 @@ router.post('/updateUser', userController.updateUser)
 router.get('/getUser', auth, userController.getUserById)
 router.post('/updateUser', userController.updateUserById)
 router.get('/getUserImg', userController.getUserImgById)
+router.get('/getExistUser',userController.getExistUserByPhone)
 
 // icon
 router.get('/category', iconController.getShowIcon)
@@ -88,9 +89,13 @@ router.post('/addNotice',noticeController.addNotice)
 router.post('/delNotice',noticeController.delNotice)
 router.get('/getNotice',noticeController.getNotice)
 router.get('/updateNotice',noticeController.updateNotice)
-router.get('/handleNotice',noticeController.handleNoticeById)
+router.get('/handleNotNotice',noticeController.handleNotNoticeById)
+router.get('/delhandleNotice',noticeController.delhandleNoticeById)
+router.get('/delNotice',noticeController.delNoticeById)
+router.get('/hadleApply',noticeController.hadleApplyById)
 // relation
 router.get('/addRelation',relationController.addRelation)
+router.post('/updateRemark',relationController.updateRemark)
 
 // welcome
 // router.post("/welcome", auth, (req, res) => {

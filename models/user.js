@@ -38,8 +38,12 @@ class User extends Base {
     return knex(this.table).select('userId', 'userName', 'image', 'power').whereIn('userId', idArr).orderBy('userName', 'asc')
   }
 
-  getPower(params){
+  getPower (params) {
     return knex(this.table).select('power').where(params)
+  }
+
+  getExistUserByPhone (params) {
+    return knex(this.table).select('userId').where(params)
   }
 }
 

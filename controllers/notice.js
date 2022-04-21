@@ -41,9 +41,34 @@ const noticeController = {
       console.log(error);
     }
   },
-  handleNoticeById: async (req, res) => {
+  handleNotNoticeById: async (req, res) => {
     try {
       const result = await Notice.updateNoticeById({ useredId: req.query.id, 'handleNotice': '0' })
+      commonWays.sendData(result, res)
+    } catch (error) {
+      console.log(error);
+    }
+  },
+  delhandleNoticeById: async (req, res) => {
+    try {
+      const result = await Notice.delete({ useredId: req.query.id, 'handleNotice': '1' })
+      console.log(result);
+      commonWays.sendData(result, res)
+    } catch (error) {
+      console.log(error);
+    }
+  },
+  hadleApplyById: async (req, res) => {
+    try {
+      const result = await Notice.hadleApplyById(req.query)
+      commonWays.sendData(result, res)
+    } catch (error) {
+      console.log(error);
+    }
+  },
+  delNoticeById: async (req, res) => {
+    try {
+      const result = await Notice.delete(req.query)
       commonWays.sendData(result, res)
     } catch (error) {
       console.log(error);

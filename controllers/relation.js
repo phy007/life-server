@@ -9,6 +9,15 @@ const relationController = {
     } catch (error) {
       console.log(error);
     }
+  },
+  updateRemark: async (req, res) => {
+    try {
+      const data = req.body
+      const result = await Relation.updateRemark({ 'ownId': data.ownId, 'friendId': data.friendId }, { 'remark': data.remark })
+      commonWays.sendData(result, res)
+    } catch (error) {
+      console.log(error);
+    }
   }
 }
 module.exports = relationController

@@ -18,6 +18,10 @@ class Notice extends Base {
   updateNoticeById (params) {
     return knex(this.table).update('handleNotice', '1').where(params)
   }
+
+  hadleApplyById (params) {
+    return knex(this.table).update('handleApply', '1').where(params)
+  }
 }
 
 module.exports = new Notice();

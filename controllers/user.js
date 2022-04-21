@@ -4,6 +4,7 @@ const jwt = require('jsonwebtoken');
 const axios = require('axios')
 const User = require('../models/user');
 const Relation = require('../models/relation');
+const commonWays = require('../middleware/common');
 
 const userController = {
   // 注册信息
@@ -68,15 +69,8 @@ const userController = {
   },
   getFriendsById: async (req, res) => {
     try {
-      const friendId = await Relation.getFriendId(req.query.userId)
-      let friArr = []
-      if (friendId.length) {
-        for (const f of friendId) {
-          friArr.push(f.friendId)
-        }
-      }
-      const friends = await User.getFriendsByIds(friArr)      
-      res.status(200).send(friends)
+      const result = await Relation.getFriendsByOwnId(req.query)
+      res.status(200).send(result)
     } catch (error) {
       console.log(error);
     }
@@ -171,6 +165,15 @@ const userController = {
   getUserImgById: async (req, res) => {
     try {
       const result = await User.getUserImgById(req.query.userId)
+      res.status(200).send(result[0])
+    } catch (error) {
+      console.log(error);
+    }
+  },
+
+  getExistUserByPhone: async (req, res) => {
+    try {
+      const result = await User.getExistUserByPhone(req.query)
       res.status(200).send(result[0])
     } catch (error) {
       console.log(error);
