@@ -48,6 +48,16 @@ const LikeController = {
     } catch (error) {
       console.log(error);
     }
+  },
+  getColAndFavByUserId: async (req, res) => {
+    try {
+      const collects = await Like.getColOrFarTop4ByUserId({ 'like.userId': req.query.userId, 'collect': '1' })
+      const favorites = await Like.getColOrFarTop4ByUserId({ 'like.userId': req.query.userId, 'favorite': '1' })
+      console.log(collects);
+      res.status(200).send({ collects, favorites })
+    } catch (error) {
+      console.log(error);
+    }
   }
 
 }

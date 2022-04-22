@@ -40,7 +40,8 @@ router.get('/getUser', auth, userController.getUserById)
 router.post('/updateUser', userController.updateUserById)
 router.get('/getUserImg', userController.getUserImgById)
 router.get('/getExistUser',userController.getExistUserByPhone)
-
+router.get('/getProfile',userController.getProfileById)
+router.get('/updatePower',userController.updatePowerById)
 // icon
 router.get('/category', iconController.getShowIcon)
 router.post('/addIcon', iconController.addIcon)
@@ -76,7 +77,7 @@ router.post('/updateFaOrCol', likeController.updateFavOrColById)
 router.post('/addLike', likeController.addLike)
 router.get('/getLikeData', likeController.getLikesById)
 router.get('/getColAndFarCount', likeController.getColAndFarCountByRecordId)
-
+router.get('/getColAndFav',likeController.getColAndFavByUserId)
 // comment
 router.get('/delComAndRep', commentController.delComAndRepByCommentId)
 router.post('/addComment', commentController.addComment)

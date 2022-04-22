@@ -25,6 +25,10 @@ class Like extends Base {
   getColOrFarCount (params) {
     return knex(this.table).where(params).count('likeId as count')
   }
+
+  getColOrFarTop4ByUserId (params) {
+    return knex(this.table).select('like.recordId', 'recordText', 'collectTime', 'favoriteTime').join('record', 'record.recordId', '=', 'like.recordId').where(params).orderBy('collectTime', 'asc').limit(4)
+  }
 }
 
 module.exports = new Like()

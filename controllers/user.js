@@ -5,6 +5,7 @@ const axios = require('axios')
 const User = require('../models/user');
 const Relation = require('../models/relation');
 const commonWays = require('../middleware/common');
+const Record = require('../models/record');
 
 const userController = {
   // 注册信息
@@ -175,6 +176,29 @@ const userController = {
     try {
       const result = await User.getExistUserByPhone(req.query)
       res.status(200).send(result[0])
+    } catch (error) {
+      console.log(error);
+    }
+  },
+
+  getProfileById: async (req, res) => {
+    try {
+      const id = req.query.userId
+      const users = await User.selectById(id)
+      let user = { userId: users[0].userId, userName: users[0].userName, image: users[0].image, phone: users[0].phone, 'power': users[0].power }
+      const momentCount = await Record.getRecordByOwnId(id)
+      const friendCount = await Relation.getFriendId({ 'ownId': id })
+      res.status(200).send({ user, momentCount: momentCount.length, friendCount: friendCount.length })
+    } catch (error) {
+      console.log(error);
+    }
+  },
+
+  updatePowerById: async (req, res) => {
+    try {
+      const result = await User.update(req.query.userId, { 'power': req.query.power })
+      console.log(result);
+      commonWays.sendData(result, res)
     } catch (error) {
       console.log(error);
     }
