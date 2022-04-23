@@ -133,33 +133,22 @@ const userController = {
     }
 
   },
-  updateUser: async (req, res) => {
-    try {
-      console.log(req.body);
-    } catch (error) {
-
-    }
-  },
   // showUser 获取用户数据并返回到页面
   getUserById: async (req, res) => {
     try {
-      let userInfo = await User.selectById(req.query.userId)
-      res.json({
-        code: 1,
-        message: "操作成功",
-        data: userInfo
-      })
+      const userInfo = await User.selectById(req.query.userId)
+      res.status(200).send(userInfo)
     } catch (e) {
-      res.json({ code: 0, message: "500", data: e.sqlMessage })
+      console.log(e);
     }
   },
 
   updateUserById: async (req, res) => {
     try {
-      await User.update(req.body.id, req.body.userInfo)
-      res.json({ code: 1, message: "操作成功" })
+      const result = await User.update(req.body.userId, req.body)
+      commonWays.sendData(result, res)
     } catch (error) {
-      res.json({ code: 0, message: "500", data: error.sqlMessage })
+      console.log(error);
     }
   },
 

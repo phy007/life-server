@@ -34,7 +34,6 @@ router.get("/wxlogin", userController.wxlogin);
 router.post("/login", userController.login);
 // create code
 router.get('/code', userController.createCode)
-router.post('/updateUser', userController.updateUser)
 
 router.get('/getUser', auth, userController.getUserById)
 router.post('/updateUser', userController.updateUserById)

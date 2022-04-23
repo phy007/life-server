@@ -37,7 +37,11 @@ const commentController = {
       if (comment.length) {
         for (const c of comment) {
           let img = await User.getUserImgByUserName(c.username)
-          c.userImage = img[0].image
+          if (img[0]) {
+            c.userImage = img[0].image
+          } else {
+            c.userImage = ''
+          }
           comments.push(c)
           // 主评论只有一条，回复可以有多条，避免数据处理不对，多表连接查询，在获取每一条回复的同时获取到该回复人的头像
           let reply = await Reply.getReplyAndUserImgById({ commentId: c.commentId })
