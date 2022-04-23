@@ -37,7 +37,6 @@ router.get('/code', userController.createCode)
 
 router.get('/getUser', auth, userController.getUserById)
 router.post('/updateUser', userController.updateUserById)
-router.get('/getUserImg', userController.getUserImgById)
 router.get('/getExistUser',userController.getExistUserByPhone)
 router.get('/getProfile',userController.getProfileById)
 router.get('/updatePower',userController.updatePowerById)

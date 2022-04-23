@@ -109,9 +109,6 @@ const userController = {
         const { last_login_date } = result[0]
         let nowDate = new Date().getTime()
         let lastDate = last_login_date.getTime()
-        console.log(nowDate);
-        console.log(lastDate);
-        console.log(nowDate - lastDate);
       }
     }).catch(e => {
       res.status(500).send(e)
@@ -155,6 +152,7 @@ const userController = {
   getUserImgById: async (req, res) => {
     try {
       const result = await User.getUserImgById(req.query.userId)
+      console.log(result);
       res.status(200).send(result[0])
     } catch (error) {
       console.log(error);

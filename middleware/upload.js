@@ -16,7 +16,6 @@ const file = {
   // 2：上传的图片存储在服务器资源文件里，前台使用该图片，请求接口返回图片资源，前台在做处理
 
   upload: (req, res) => {
-    console.log(req.files[0]);
     let { size, mimetype, path } = req.files[0]
     let types = ['jpg', 'jpeg', 'png', 'gif']
     let tmpType = mimetype.split('/')[1]

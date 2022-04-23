@@ -108,7 +108,8 @@ const recordController = {
       } else {
         result = await Record.getRecordAndLikeByRecordId(req.query.recordId)
       }
-      res.status(200).send(result[0])
+      const userImage = await User.getUserImgById(result[0].userId)
+      res.status(200).send({ recordInfo: result[0], userImage: userImage[0].image })
     } catch (error) {
       console.log(error);
     }
