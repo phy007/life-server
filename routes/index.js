@@ -95,7 +95,7 @@ router.get('/hadleApply',noticeController.hadleApplyById)
 // relation
 router.get('/addRelation',relationController.addRelation)
 router.post('/updateRemark',relationController.updateRemark)
-
+router.get('/delFriends',relationController.delFriendsById)
 // welcome
 // router.post("/welcome", auth, (req, res) => {
 //   res.render('pages/welcome');

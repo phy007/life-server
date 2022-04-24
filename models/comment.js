@@ -7,7 +7,7 @@ class Comment extends Base {
   }
 
   getCommentByRecordId (id) {
-    return knex(this.table).where('recordId', '=', id).orderBy('date', 'asc')
+    return knex(this.table).join('user', 'user.userId', '=', 'comment.commentUserId').select('commentId', 'date', 'content', 'recordId', 'commentUserId', 'userName as username', 'image').where('recordId', '=', id).orderBy('date', 'asc')
   }
 }
 

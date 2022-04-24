@@ -9,7 +9,10 @@ class Relation extends Base {
     return knex(this.table).select('friendId').where(params)
   }
   getFriendsByOwnId (params) {
-    return knex(this.table).join('user', 'user.userId', '=', 'relation.friendId').select('friendId', 'remark', 'userName', 'image', 'power').where(params)
+    return knex(this.table).join('user', 'user.userId', '=', 'relation.friendId').select('id', 'friendId', 'remark', 'userName', 'image', 'power').where(params)
+  }
+  getFriendsPhoneByOwnId (params) {
+    return knex(this.table).join('user', 'user.userId', '=', 'relation.friendId').select('phone').where(params)
   }
   updateRemark (params, data) {
     return knex(this.table).update(data).where(params)

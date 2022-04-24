@@ -7,7 +7,7 @@ class Reply extends Base {
   }
 
   getReplyById (params) {
-    return knex(this.table).where(params).orderBy('replyDate', 'asc')
+    return knex(this.table).join('user', 'user.userId', '=', 'reply.userId').select('replyId', 'commentId', 'user.userName', 'replyContent', 'replyDate', 'reply.userId', 'user.image').where(params).orderBy('replyDate', 'asc')
   }
 
   existCommentId (id) {
@@ -15,7 +15,7 @@ class Reply extends Base {
   }
 
   getReplyAndUserImgById (params) {
-    return knex(this.table).join('user', 'user.userId', '=', 'reply.userId').select('replyId', 'commentId', 'reply.userName', 'replyContent', 'replyDate', 'reply.userId', 'repliedUserName', 'user.image').where(params)
+    return knex(this.table).join('user', 'user.userId', '=', 'reply.userId').select('replyId', 'commentId', 'user.userName', 'replyContent', 'replyDate', 'reply.userId', 'user.image').where(params)
   }
 }
 

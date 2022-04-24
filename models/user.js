@@ -30,8 +30,8 @@ class User extends Base {
     return knex(this.table).select('image').where('userId', '=', id)
   }
 
-  getUserImgByUserName (username) {
-    return knex(this.table).select('image').where('userName', '=', username)
+  getUserImgAndNameById(id){
+    return knex(this.table).select('image','userName').where('userId', '=', id)
   }
 
   getFriendsByIds (idArr) {
@@ -45,6 +45,7 @@ class User extends Base {
   getExistUserByPhone (params) {
     return knex(this.table).select('userId').where(params)
   }
+
 }
 
 module.exports = new User();

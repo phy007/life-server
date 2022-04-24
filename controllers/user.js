@@ -70,8 +70,15 @@ const userController = {
   },
   getFriendsById: async (req, res) => {
     try {
-      const result = await Relation.getFriendsByOwnId(req.query)
-      res.status(200).send(result)
+      const friends = await Relation.getFriendsByOwnId(req.query)
+      const phones = await Relation.getFriendsPhoneByOwnId(req.query)
+      let phoneArr = []
+      if (phones.length) {
+        for (const p of phones) {
+          phoneArr.push(p.phone)
+        }
+      }
+      res.status(200).send({ friends, phones: phoneArr })
     } catch (error) {
       console.log(error);
     }

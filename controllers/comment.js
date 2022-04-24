@@ -36,9 +36,10 @@ const commentController = {
       let replys = [], comments = []
       if (comment.length) {
         for (const c of comment) {
-          let img = await User.getUserImgByUserName(c.username)
-          if (img[0]) {
-            c.userImage = img[0].image
+          let u = await User.getUserImgAndNameById(c.commentUserId)
+          if (u[0]) {
+            c.userImage = u[0].image
+            c.username = u[0].userName
           } else {
             c.userImage = ''
           }

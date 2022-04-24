@@ -8,11 +8,11 @@ class Record extends Base {
 
   // methods
   getRecordByOwnId (id) {
-    return knex(this.table).where('userId', '=', id).orderBy('time', 'desc')
+    return knex(this.table).where('record.userId', '=', id).orderBy('time', 'desc')
   }
 
   getRecordByFriendId (idArr) {
-    return knex(this.table).select().whereIn('userId', idArr).orderBy('time', 'desc')
+    return knex(this.table).join('user', 'user.userId', '=', 'record.userId').select('userName', 'recordId', 'recordText', 'recordImage', 'record.userId', 'time').whereIn('record.userId', idArr).orderBy('time', 'desc')
   }
 
   update (id, params) {
@@ -24,7 +24,7 @@ class Record extends Base {
   }
 
   getRecordAndLikeByRecordId (id) {
-    return knex(this.table).join('like', 'like.recordId', '=', 'record.recordId').select('likeId', 'favorite', 'collect', 'record.recordId', 'userName', 'recordText', 'recordImage', 'power', 'record.userId', 'time').where('record.recordId', '=', id)
+    return knex(this.table).join('like', 'like.recordId', '=', 'record.recordId').select('likeId', 'favorite', 'collect', 'record.recordId', 'recordText', 'recordImage', 'record.userId', 'time').where('record.recordId', '=', id)
   }
 
 }

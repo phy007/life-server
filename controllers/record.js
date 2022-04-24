@@ -11,7 +11,8 @@ const recordController = {
     try {
       const ownId = req.query.userId
       const record = await Record.getRecordByOwnId(ownId)
-      res.status(200).send({ ownRecord: record })
+      const user = await User.getUserImgAndNameById(ownId)
+      res.status(200).send({ ownRecord: record, userName: user[0].userName })
     } catch (error) {
       console.log(error);
     }
@@ -67,6 +68,8 @@ const recordController = {
           }
         }
       }
+      console.log(friRecord);
+      console.log(commentArr);
       res.status(200).send({ friRecord, commentsAndReplys: commentArr })
     } catch (error) {
       console.log(error);
@@ -108,8 +111,8 @@ const recordController = {
       } else {
         result = await Record.getRecordAndLikeByRecordId(req.query.recordId)
       }
-      const userImage = await User.getUserImgById(result[0].userId)
-      res.status(200).send({ recordInfo: result[0], userImage: userImage[0].image })
+      const user = await User.getUserImgAndNameById(result[0].userId)
+      res.status(200).send({ recordInfo: result[0], userImage: user[0].image, userName: user[0].userName })
     } catch (error) {
       console.log(error);
     }
