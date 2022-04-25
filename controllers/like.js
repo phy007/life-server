@@ -34,7 +34,6 @@ const LikeController = {
           result.push(record[0])
         }
       }
-      console.log(result);
       res.status(200).send(result)
     } catch (error) {
       console.log(error);

@@ -11,7 +11,7 @@ const recordController = {
     try {
       const ownId = req.query.userId
       const record = await Record.getRecordByOwnId(ownId)
-      const user = await User.getUserImgAndNameById(ownId)
+      let user = await User.getUserImgAndNameById(ownId)
       res.status(200).send({ ownRecord: record, userName: user[0].userName })
     } catch (error) {
       console.log(error);
@@ -68,8 +68,6 @@ const recordController = {
           }
         }
       }
-      console.log(friRecord);
-      console.log(commentArr);
       res.status(200).send({ friRecord, commentsAndReplys: commentArr })
     } catch (error) {
       console.log(error);

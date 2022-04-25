@@ -20,7 +20,7 @@ class Record extends Base {
   }
 
   getRecordByRecordId (id) {
-    return knex(this.table).where('recordId', '=', id)
+    return knex(this.table).join('user', 'user.userId', '=', 'record.userId').select('userName', 'recordId', 'recordText', 'recordImage', 'record.userId', 'time').where('recordId', '=', id)
   }
 
   getRecordAndLikeByRecordId (id) {
