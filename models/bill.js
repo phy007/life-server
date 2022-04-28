@@ -14,6 +14,14 @@ class Bill extends Base {
     return knex(this.table).where('billId', '=', id)
       .update(info)
   }
+
+  getBillBydate (params) {
+    return knex(this.table).select().where(params).orderBy('date', 'desc')
+  }
+
+  getBillById (params) {
+    return knex(this.table).select().where(params)
+  }
 }
 
 module.exports = new Bill()

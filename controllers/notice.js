@@ -73,6 +73,28 @@ const noticeController = {
     } catch (error) {
       console.log(error);
     }
+  },
+  addNoticeType5ByFriendId: async (req, res) => {
+    try {
+      const { friIdArr, noticeInfo } = req.body
+      if (friIdArr.length) {
+        for (const f of friIdArr) {
+          noticeInfo.useredId = f
+          await Notice.insert(noticeInfo)
+        }
+      }
+      res.status(200).send('message')
+    } catch (error) {
+      console.log(object);
+    }
+  },
+  delNoticeType5: async (req, res) => {
+    try {
+      const result = await Notice.delete(req.body)
+      commonWays.sendData(result, res)
+    } catch (error) {
+      console.log(error);
+    }
   }
 }
 module.exports = noticeController

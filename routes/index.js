@@ -54,6 +54,7 @@ router.get('/bills', auth, billController.getBillsByUser)
 router.get('/delBill', billController.delBillById)
 // update bill by billId
 router.post('/updateBill', billController.updateBillById)
+router.get('/getBillBydate',billController.getBillBydate)
 
 // billType
 router.get('/bTName', billTypeController.getBillTypeNameById)
@@ -92,6 +93,8 @@ router.get('/handleNotNotice',noticeController.handleNotNoticeById)
 router.get('/delhandleNotice',noticeController.delhandleNoticeById)
 router.get('/delNotice',noticeController.delNoticeById)
 router.get('/hadleApply',noticeController.hadleApplyById)
+router.post('/addNoticeType5',noticeController.addNoticeType5ByFriendId)
+router.post('/delNoticeType5',noticeController.delNoticeType5)
 // relation
 router.get('/addRelation',relationController.addRelation)
 router.post('/updateRemark',relationController.updateRemark)

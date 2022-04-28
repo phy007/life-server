@@ -5,6 +5,7 @@ const Comment = require('../models/comment')
 const Reply = require('../models/reply')
 const commonWays = require('../middleware/common')
 const User = require('../models/user')
+const Bill = require('../models/bill')
 
 const recordController = {
   getOwnRecords: async (req, res) => {
@@ -12,7 +13,20 @@ const recordController = {
       const ownId = req.query.userId
       const record = await Record.getRecordByOwnId(ownId)
       let user = await User.getUserImgAndNameById(ownId)
-      res.status(200).send({ ownRecord: record, userName: user[0].userName })
+      let bill, temp = {}, recordArr = []
+      if (record.length) {
+        for (const r of record) {
+          temp = r
+          if (r.billId) {
+            bill = await Bill.getBillById({ 'billId': r.billId })
+            temp.bill = bill
+          } else {
+            temp.bill = []
+          }
+          recordArr.push(temp)
+        }
+      }
+      res.status(200).send({ ownRecord: recordArr, userName: user[0].userName })
     } catch (error) {
       console.log(error);
     }
@@ -36,10 +50,16 @@ const recordController = {
         friRecordArr = await Record.getRecordByFriendId(fIdArr)
         if (friRecordArr.length) {
           for (const e of friRecordArr) {
+            let obj = e
+            if (e.billId) {
+              let bill = await Bill.getBillById({ 'billId': e.billId })
+              obj.bill = bill
+            } else {
+              obj.bill = []
+            }
             // 根据对应记录id获取like表中内容，并添加至相对应记录详情后面
             // 根据对应记录id获取comment表中评论的内容
             // 根据对应评论id获取reply表中回复的内容
-            let obj = e
             let l = await Like.getLikeByRecordId(e.recordId)
             if (l.length) {
               obj.likeId = l[0].likeId
@@ -68,7 +88,7 @@ const recordController = {
           }
         }
       }
-      res.status(200).send({ friRecord, commentsAndReplys: commentArr })
+      res.status(200).send({ friRecord, commentsAndReplys: commentArr, friIdArr: fIdArr })
     } catch (error) {
       console.log(error);
     }
@@ -95,9 +115,9 @@ const recordController = {
   addRecord: async (req, res) => {
     try {
       let result = await Record.insert(req.body)
-      commonWays.sendData(result, res)
+      res.status(200).send(result)
     } catch (error) {
-      // console.log(error);
+      console.log(error);
     }
   },
 
@@ -110,7 +130,13 @@ const recordController = {
         result = await Record.getRecordAndLikeByRecordId(req.query.recordId)
       }
       const user = await User.getUserImgAndNameById(result[0].userId)
-      res.status(200).send({ recordInfo: result[0], userImage: user[0].image, userName: user[0].userName })
+      let bill
+      if (result[0].billId) {
+        bill = await Bill.getBillById({ 'billId': result[0].billId })
+      } else {
+        bill = []
+      }
+      res.status(200).send({ recordInfo: result[0], userImage: user[0].image, userName: user[0].userName, bill })
     } catch (error) {
       console.log(error);
     }
