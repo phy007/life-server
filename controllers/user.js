@@ -106,7 +106,7 @@ const userController = {
   },
   // wxlogin
   wxlogin: (req, res) => {
-    let url = `https://api.weixin.qq.com/sns/jscode2session?appid=wxc3483d994aee7ac9&secret=36a9dcf75dde28817556083fa864330d&js_code=${req.query.code}&grant_type=authorization_code`
+    let url = `https://api.weixin.qq.com/sns/jscode2session?appid=${appid}&js_code=${req.query.code}&grant_type=authorization_code`
     axios.get(url).then(async (r) => {
       const { openid, session_key } = r.data
       const result = await User.exitOpenidAndKey({ openid, session_key })
