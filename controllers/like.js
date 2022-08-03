@@ -8,15 +8,15 @@ const LikeController = {
       const result = await Like.updateFavOrColById(id, { favorite, collect, collectTime, favoriteTime })
       commonWays.sendData(result, res)
     } catch (error) {
-      console.log(error);
+      console.log(error)
     }
   },
   addLike: async (req, res) => {
     try {
       const result = await Like.insert(req.body)
-      commonWays(result, res)
+      commonWays.sendData(result, res)
     } catch (error) {
-      console.log(error);
+      console.log(error)
     }
   },
   getLikesById: async (req, res) => {
@@ -36,7 +36,7 @@ const LikeController = {
       }
       res.status(200).send(result)
     } catch (error) {
-      console.log(error);
+      console.log(error)
     }
   },
   getColAndFarCountByRecordId: async (req, res) => {
@@ -45,7 +45,7 @@ const LikeController = {
       const favorite = await Like.getColOrFarCount(req.query, { favorite: '1' })
       res.status(200).send({ collect: collect[0].count, favorite: favorite[0].count })
     } catch (error) {
-      console.log(error);
+      console.log(error)
     }
   },
   getColAndFavByUserId: async (req, res) => {
@@ -54,7 +54,7 @@ const LikeController = {
       const favorites = await Like.getColOrFarTop4ByUserId({ 'like.userId': req.query.userId, 'favorite': '1' })
       res.status(200).send({ collects, favorites })
     } catch (error) {
-      console.log(error);
+      console.log(error)
     }
   }
 

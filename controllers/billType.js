@@ -13,7 +13,7 @@ const billTypeController = {
       const result = await billType.all()
       res.json({ code: 1, message: 'success', data: result })
     } catch (error) {
-      res.json({ code: 0, message: '获取数据失败', data: error.sqlMessage })
+      console.log(error)
     }
   },
   delBillTypeById: async (req, res) => {
@@ -21,7 +21,7 @@ const billTypeController = {
       await billType.delete(req.query)
       res.json({ code: 1, message: 'success' })
     } catch (error) {
-      res.json({ code: 0, message: '删除失败', data: error.sqlMessage })
+      console.log(error)
     }
   },
   updateBTNameById: async (req, res) => {
@@ -29,7 +29,7 @@ const billTypeController = {
       await billType.update(req.query)
       res.json({ code: 1, message: 'success' })
     } catch (error) {
-      res.json({ code: 0, message: '获取数据失败', data: error.sqlMessage })
+      console.log(error)
     }
   },
   addBTNameByName: async (req, res) => {
@@ -37,7 +37,7 @@ const billTypeController = {
       await billType.insert(req.query)
       res.json({ code: 1, message: 'success' })
     } catch (error) {
-      res.json({ code: 0, message: '获取数据失败', data: error.sqlMessage })
+      console.log(error)
     }
   }
 }

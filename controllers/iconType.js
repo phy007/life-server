@@ -6,7 +6,7 @@ const iconTypeController = {
       const iconTypeData = await iconType.all()
       res.status(200).send(iconTypeData)
     } catch (err) {
-      res.status(400).send({message: '操作失败', data: err })
+      console.log(err)
     }
   }
 }

@@ -5,7 +5,7 @@ const billController = {
       await bill.insert(req.body)
       res.status(200).send({ message: 'success' })
     } catch (error) {
-      res.status(400).send({ message: '操作失败', data: error })
+      console.log(error)
     }
   },
   getBillsByUser: async (req, res) => {
@@ -13,7 +13,7 @@ const billController = {
       const billList = await bill.getBillsByUser(req.query)
       res.status(200).send(billList)
     } catch (error) {
-      res.status(400).send({ message: '操作失败', data: error })
+      console.log(error)
     }
   },
   delBillById: async (req, res) => {
@@ -21,7 +21,7 @@ const billController = {
       await bill.delete(req.query)
       res.status(200).send({ message: 'success' })
     } catch (error) {
-      res.status(400).send({ message: 'fail', data: error })
+      console.log(error)
     }
   },
   updateBillById: async (req, res) => {
@@ -30,7 +30,7 @@ const billController = {
       await bill.updateBillById(billId, addInfo)
       res.status(200).send({ message: '修改成功' })
     } catch (error) {
-      res.status(400).send({ message: '操作失败', data: error })
+      console.log(error)
     }
   },
   getBillBydate: async (req, res) => {

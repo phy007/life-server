@@ -6,10 +6,10 @@ class BillType extends Base {
     super(props)
   }
   getBillTypeNameById (b) {
-    return knex('billType').where(Object.keys(b)[0], '=', Object.values(b)[0]).select('billTypeName')
+    return knex(this.table).where(Object.keys(b)[0], '=', Object.values(b)[0]).select('billTypeName')
   }
   update(bt){
-    return knex('billType').where('billTypeId', '=', bt.billTypeId).update({'billTypeName':bt.billTypeName});
+    return knex(this.table).where('billTypeId', '=', bt.billTypeId).update({'billTypeName':bt.billTypeName});
   }
 
 }

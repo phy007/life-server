@@ -28,7 +28,7 @@ const recordController = {
       }
       res.status(200).send({ ownRecord: recordArr, userName: user[0].userName })
     } catch (error) {
-      console.log(error);
+      console.log(error)
     }
   },
 
@@ -90,7 +90,7 @@ const recordController = {
       }
       res.status(200).send({ friRecord, commentsAndReplys: commentArr, friIdArr: fIdArr })
     } catch (error) {
-      console.log(error);
+      console.log(error)
     }
   },
 
@@ -99,7 +99,7 @@ const recordController = {
       const result = await Record.delete(req.query)
       commonWays.sendData(result, res)
     } catch (error) {
-      console.log(error);
+      console.log(error)
     }
   },
 
@@ -108,7 +108,7 @@ const recordController = {
       const result = await Record.update(req.body.recordId, req.body.params)
       commonWays.sendData(result, res)
     } catch (error) {
-      console.log(error);
+      console.log(error)
     }
   },
 
@@ -117,7 +117,7 @@ const recordController = {
       let result = await Record.insert(req.body)
       res.status(200).send(result)
     } catch (error) {
-      console.log(error);
+      console.log(error)
     }
   },
 
@@ -138,7 +138,7 @@ const recordController = {
       }
       res.status(200).send({ recordInfo: result[0], userImage: user[0].image, userName: user[0].userName, bill })
     } catch (error) {
-      console.log(error);
+      console.log(error)
     }
   }
 }

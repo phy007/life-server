@@ -11,7 +11,7 @@ const replyController = {
         res.status(204).send('fail')
       }
     } catch (error) {
-      console.log(error);
+      console.log(error)
     }
   },
 
@@ -20,7 +20,7 @@ const replyController = {
       const result = await Reply.delete(req.query)
       commonWays.sendData(result, res)
     } catch (error) {
-      console.log(error);
+      console.log(error)
     }
   }
 }

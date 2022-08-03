@@ -98,7 +98,7 @@ router.post('/delNoticeType5',noticeController.delNoticeType5)
 // relation
 router.get('/addRelation',relationController.addRelation)
 router.post('/updateRemark',relationController.updateRemark)
-router.get('/delFriends',relationController.delFriendsById)
+router.get('/delFriends',relationController.delFriendById)
 // welcome
 // router.post("/welcome", auth, (req, res) => {
 //   res.render('pages/welcome');

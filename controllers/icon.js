@@ -8,8 +8,7 @@ const iconController = {
       const iconInfo = await icon.iconInfo()
       res.status(200).send(iconInfo)
     } catch (err) {
-      res.status(400).send(err.sqlMessage)
-      // res.json({ code: 0, message: '操作失败', data: err })
+      console.log(err)
     }
   },
 
@@ -25,7 +24,7 @@ const iconController = {
         res.json({ code: 2, message: '提交数据有误！' })
       }
     } catch (err) {
-      res.json({ code: 0, message: '操作失败', data: err })
+      console.log(err)
     }
   },
 
@@ -35,7 +34,7 @@ const iconController = {
       await icon.deleteById(req.query.iconId)
       res.status(200).send({ message: 'success' })
     } catch (error) {
-      res.status(400).send({ message: '操作失败', data: error })
+      console.log(error)
     }
   }
 }

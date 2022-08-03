@@ -53,7 +53,7 @@ const userController = {
       }
 
     } catch (err) {
-      console.log(err);
+      console.log(err)
     }
   },
   existUser: async (req, res) => {
@@ -65,7 +65,7 @@ const userController = {
         res.status(600).send({ message: 'not found' })
       }
     } catch (error) {
-      console.log(error);
+      console.log(error)
     }
   },
   getFriendsById: async (req, res) => {
@@ -80,7 +80,7 @@ const userController = {
       }
       res.status(200).send({ friends, phones: phoneArr })
     } catch (error) {
-      console.log(error);
+      console.log(error)
     }
   },
 
@@ -101,7 +101,7 @@ const userController = {
         res.status(200).send({ message: 'notFound' })
       }
     } catch (error) {
-      console.log(error);
+      console.log(error)
     }
   },
   // wxlogin
@@ -143,7 +143,7 @@ const userController = {
       const userInfo = await User.selectById(req.query.userId)
       res.status(200).send(userInfo)
     } catch (e) {
-      console.log(e);
+      console.log(e)
     }
   },
 
@@ -152,7 +152,7 @@ const userController = {
       const result = await User.update(req.body.userId, req.body)
       commonWays.sendData(result, res)
     } catch (error) {
-      console.log(error);
+      console.log(error)
     }
   },
 
@@ -162,7 +162,7 @@ const userController = {
       console.log(result);
       res.status(200).send(result[0])
     } catch (error) {
-      console.log(error);
+      console.log(error)
     }
   },
 
@@ -171,7 +171,7 @@ const userController = {
       const result = await User.getExistUserByPhone(req.query)
       res.status(200).send(result[0])
     } catch (error) {
-      console.log(error);
+      console.log(error)
     }
   },
 
@@ -184,7 +184,7 @@ const userController = {
       const friendCount = await Relation.getFriendId({ 'ownId': id })
       res.status(200).send({ user, momentCount: momentCount.length, friendCount: friendCount.length })
     } catch (error) {
-      console.log(error);
+      console.log(error)
     }
   },
 
@@ -194,7 +194,7 @@ const userController = {
       console.log(result);
       commonWays.sendData(result, res)
     } catch (error) {
-      console.log(error);
+      console.log(error)
     }
   }
 }

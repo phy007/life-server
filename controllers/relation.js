@@ -13,7 +13,7 @@ const relationController = {
       }
       commonWays.sendData(result, res)
     } catch (error) {
-      console.log(error);
+      console.log(error)
     }
   },
   updateRemark: async (req, res) => {
@@ -22,15 +22,15 @@ const relationController = {
       const result = await Relation.updateRemark({ 'ownId': data.ownId, 'friendId': data.friendId }, { 'remark': data.remark })
       commonWays.sendData(result, res)
     } catch (error) {
-      console.log(error);
+      console.log(error)
     }
   },
-  delFriendsById: async (req, res) => {
+  delFriendById: async (req, res) => {
     try {
       const result = await Relation.delete(req.query)
       commonWays.sendData(result, res)
     } catch (error) {
-      console.log(error);
+      console.log(error)
     }
   }
 }

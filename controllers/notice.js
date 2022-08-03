@@ -7,7 +7,7 @@ const noticeController = {
       const result = await Notice.insert(req.body)
       commonWays.sendData(result, res)
     } catch (error) {
-      console.log(error);
+      console.log(error)
     }
   },
   delNotice: async (req, res) => {
@@ -15,7 +15,7 @@ const noticeController = {
       const result = await Notice.delete(req.body)
       commonWays.sendData(result, res)
     } catch (error) {
-      console.log(error);
+      console.log(error)
     }
   },
   getNotice: async (req, res) => {
@@ -25,12 +25,13 @@ const noticeController = {
       let arr = [[], [], [], []]
       if (result.length) {
         for (const v of result) {
-          arr[v.type - 1].push(v)
+          if(arr[v.type-1])
+            arr[v.type - 1].push(v)
         }
       }
       res.status(200).send({ arr, length: l[0].count })
     } catch (error) {
-      console.log(error);
+      console.log(error)
     }
   },
   updateNotice: async (req, res) => {
@@ -38,7 +39,7 @@ const noticeController = {
       const result = await Notice.updateNoticeById(req.query)
       commonWays.sendData(result, res)
     } catch (error) {
-      console.log(error);
+      console.log(error)
     }
   },
   handleNotNoticeById: async (req, res) => {
@@ -46,7 +47,7 @@ const noticeController = {
       const result = await Notice.updateNoticeById({ useredId: req.query.id, 'handleNotice': '0' })
       commonWays.sendData(result, res)
     } catch (error) {
-      console.log(error);
+      console.log(error)
     }
   },
   delhandleNoticeById: async (req, res) => {
@@ -55,7 +56,7 @@ const noticeController = {
       console.log(result);
       commonWays.sendData(result, res)
     } catch (error) {
-      console.log(error);
+      console.log(error)
     }
   },
   hadleApplyById: async (req, res) => {
@@ -63,7 +64,7 @@ const noticeController = {
       const result = await Notice.hadleApplyById(req.query)
       commonWays.sendData(result, res)
     } catch (error) {
-      console.log(error);
+      console.log(error)
     }
   },
   delNoticeById: async (req, res) => {
@@ -71,7 +72,7 @@ const noticeController = {
       const result = await Notice.delete(req.query)
       commonWays.sendData(result, res)
     } catch (error) {
-      console.log(error);
+      console.log(error)
     }
   },
   addNoticeType5ByFriendId: async (req, res) => {
@@ -85,7 +86,7 @@ const noticeController = {
       }
       res.status(200).send('message')
     } catch (error) {
-      console.log(object);
+      console.log(object)
     }
   },
   delNoticeType5: async (req, res) => {
@@ -93,7 +94,7 @@ const noticeController = {
       const result = await Notice.delete(req.body)
       commonWays.sendData(result, res)
     } catch (error) {
-      console.log(error);
+      console.log(error)
     }
   }
 }
